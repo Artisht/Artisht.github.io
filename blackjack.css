@@ -53,7 +53,10 @@ text-align:center;
     margin: 3px;
     border:solid 3px;
 }
-
+.red 
+{
+    color: red;
+}
 .game .status
 {
     display: inline-block;

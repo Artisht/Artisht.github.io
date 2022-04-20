@@ -25,14 +25,6 @@ function createPlayers(num) {
     players.push(player);
   }
 }
-function createDealer(num) {
-    dealers = new Array();
-    for (var i = 1; i <= num; i++){
-        var hand = new Array();
-        var dealer = { Name: "Dealer" + i, ID: i, Points: 0, Hand: hand};
-        player.push(dealer)
-    }
-}
 
 function createPlayersUI() {
   document.getElementById("players").innerHTML = "";
@@ -68,7 +60,6 @@ function shuffle() {
     deck[location2] = tmp;
   }
 }
-
 
 function startblackjack() {
   document.getElementById("btnStart").value = "Restart";
@@ -106,12 +97,20 @@ function renderCard(card, player) {
 function getCardUI(card) {
   var el = document.createElement("div");
   var icon = "";
-  if (card.Suit == "Hearts") icon = "&hearts;";
-  else if (card.Suit == "Spades") icon = "&spades;";
-  else if (card.Suit == "Diamonds") icon = "&diams;";
-  else icon = "&clubs;";
+  var color = "";
+  if (card.Suit == "Hearts") {
+    icon = "&hearts;";
+    color = " red";
+  } else if (card.Suit == "Spades") {
+    icon = "&spades;";
+  } else if (card.Suit == "Diamonds") {
+    icon = "&diams;";
+    color = " red";
+  } else {
+    icon = "&clubs;";
+  }
 
-  el.className = "card";
+  el.className = `card${color}`;
   el.innerHTML = card.Value + "<br/>" + icon;
   return el;
 }
@@ -146,7 +145,7 @@ function hitMe() {
     updateDeck();
     check();
   }
-} 
+}
 
 function stay() {
   // move on to next player, if any
@@ -156,10 +155,9 @@ function stay() {
       .classList.remove("active");
     currentPlayer += 1;
     document.getElementById("player_" + currentPlayer).classList.add("active");
-  if (currentPlayer === 1 && players[currentPlayer].Points < 17){
-    bot()
-    return
   }
+  if (currentPlayer === 1) {
+    bot();
   } else {
     end();
   }
@@ -196,11 +194,14 @@ function updateDeck() {
 }
 
 function bot() {
-  if(players[currentPlayer].Points < 17){
-    hitMe()
+  while (players[currentPlayer].Points < 17) {
+    hitMe();
   }
-  else{
-    stay()
+  if (players[currentPlayer].points >= 17) {
+    stay();
+  } else {
+    end();
+    return;
   }
 }
 
