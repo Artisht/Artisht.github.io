@@ -69,6 +69,7 @@ function shuffle() {
   }
 }
 
+
 function startblackjack() {
   document.getElementById("btnStart").value = "Restart";
   document.getElementById("status").style.display = "none";
@@ -145,7 +146,7 @@ function hitMe() {
     updateDeck();
     check();
   }
-}
+} 
 
 function stay() {
   // move on to next player, if any
@@ -155,6 +156,10 @@ function stay() {
       .classList.remove("active");
     currentPlayer += 1;
     document.getElementById("player_" + currentPlayer).classList.add("active");
+  if (currentPlayer === 1 && players[currentPlayer].Points < 17){
+    bot()
+    return
+  }
   } else {
     end();
   }
@@ -188,6 +193,15 @@ function check() {
 
 function updateDeck() {
   document.getElementById("deckcount").innerHTML = deck.length;
+}
+
+function bot() {
+  if(players[currentPlayer].Points < 17){
+    hitMe()
+  }
+  else{
+    stay()
+  }
 }
 
 window.addEventListener("load", function () {
