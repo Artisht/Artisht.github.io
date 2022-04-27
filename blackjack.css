@@ -7,10 +7,10 @@ body{
     width: 720px;
     border: solid 1px #ddd;
     margin: 0 auto;
-   background: #750D37;
-border: solid 10px;
-text-align:center;
-min-height:430px;
+    background: #750D37;
+    border: solid 10px;
+    text-align:center;
+    min-height:430px;
 }
 
 .btn{
@@ -53,12 +53,10 @@ text-align:center;
     margin: 3px;
     border:solid 3px;
 }
-.red 
-{
+.red {
     color: red;
 }
-.game .status
-{
+.game .status{
     display: inline-block;
 background: gold;
 border: solid 5px white;
