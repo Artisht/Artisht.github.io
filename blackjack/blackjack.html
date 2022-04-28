@@ -6,23 +6,26 @@
     <title></title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="blackjack.css" />
-    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="../header.css" />
   </head>
   <body>
     <header>
-      <div class="title">Money guzzler</div>
-      <nav>
-        <div class="home">
-          <a href="main.html">Home</a>
-        </div>
-        <div class="blackjack">
+      <div class="topnav">
+        <a href="../main.html" class="active">Money guzzler</a>
+        <div id="myLinks">
           <a href="blackjack.html">Blackjack</a>
+          <a href="#contact">Contact</a>
+          <a href="#info">Info</a>
         </div>
-        <div class="info">
-          <a href="">Info</a>
-        </div>
-      </nav>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
     </header>
     <div class="game">
       <h3>Blackjack</h3>
@@ -52,5 +55,6 @@
       </div>
     </div>
     <script src="blackjack.js" async defer></script>
+    <script src="../header.js"></script>
   </body>
 </html>

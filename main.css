@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    position: relative;
+}
+#hero{
+    background-image: url(pics/Casino-2.jpg);   
+    height: 80vh;
+    width: 100%;
+    background-size: cover;
+}
