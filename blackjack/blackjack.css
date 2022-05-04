@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap');
+*{
+    font-family: 'Cormorant Garamond', serif;
+    margin: 0;
+}
 body{
     background-color: #210124;
 }
