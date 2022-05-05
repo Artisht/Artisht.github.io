@@ -40,7 +40,16 @@ function createPlayersUI() {
     div_player.className = "player";
     div_hand.id = "hand_" + i;
 
-    div_playerid.innerHTML = "Player " + players[i].ID;
+  
+    if(i === 0){
+      div_player.innerHTML = "You"
+      players[i].Name = "You"
+    } else if(i === players.length - 1){
+      div_player.innerHTML = "Dealer"
+      players[i].Name = "Dealer"
+    } else{
+      div_player.innerHTML = "Player " + players[i].ID;
+    }
     div_player.appendChild(div_playerid);
     div_player.appendChild(div_hand);
     div_player.appendChild(div_points);
@@ -68,7 +77,7 @@ function startblackjack() {
   currentPlayer = 0;
   createDeck();
   shuffle();
-  createPlayers(2);
+  createPlayers(4);
   createPlayersUI();
   dealHands();
   document.getElementById("player_" + currentPlayer).classList.add("active");
@@ -156,10 +165,13 @@ function stay() {
     currentPlayer += 1;
     document.getElementById("player_" + currentPlayer).classList.add("active");
   }
-  if (currentPlayer === 1) {
-    bot();
-  } else {
+  if (players[currentPlayer].Name === "Dealer" ) {
+    while (players[currentPlayer].Points < 17) {
+      hitMe();
+    }
     end();
+  } else {
+    bot();
   }
 }
 
@@ -176,7 +188,7 @@ function end() {
   }
 
   document.getElementById("status").innerHTML =
-    "Winner: Player " + players[winner].ID;
+    "Winner: " + players[winner].Name;
   document.getElementById("status").style.display = "inline-block";
 }
 
@@ -197,12 +209,9 @@ function bot() {
   while (players[currentPlayer].Points < 17) {
     hitMe();
   }
-  if (players[currentPlayer].points >= 17) {
+  if (players[currentPlayer].Points >= 17) {
     stay();
-  } else {
-    end();
-    return;
-  }
+  } 
 }
 
 window.addEventListener("load", function () {
