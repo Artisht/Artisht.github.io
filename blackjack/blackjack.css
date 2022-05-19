@@ -4,6 +4,7 @@
     margin: 0;
 }
 body{
+    overflow-x: hidden;
     background-image: url(../pics/blackjacktable.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -15,7 +16,7 @@ body{
     width: 720px;
     border: solid 1px #ddd;
     margin: 0 auto;
-    background: #750D37;
+    background: #327147;
     border: solid 10px;
     text-align:center;
     min-height:430px;
@@ -100,6 +101,34 @@ text-align: center;
     vertical-align: top;
     background:#f5f5f5;
 }
+#bet{
+    font-size: 30px;
+    background-color: #327147;
+    color: white;
+    border: solid 4px black;
+    width: 50px;
+    padding: 50px;
+    position: absolute;
+    left: 475px;
+    bottom: 69px;
+}
+#bet input{
+    width: 100px;
+    padding: 10px;
+    position: absolute;
+    left: 15px;
+    font-size: 20px;
+}
+#bet h2{
+    position: absolute;
+    top: 0px;
+    left: 25px;
+}
+#bet #money{
+    position: absolute;
+    left: 25px;
+}
+
 #player_0{
     width: 20%;
     position: absolute;
@@ -118,6 +147,7 @@ text-align: center;
 }
 
 .deck{
+    display: none;
     float:left;
     background: white;
     color:#222;
@@ -125,7 +155,6 @@ text-align: center;
     border-radius:10px;
     border: double 5px;
 }
-
 .btn
 {
     background:#222;

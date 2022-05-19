@@ -5,6 +5,7 @@
     padding: 0;
 }
 body{
+    overflow-x: hidden;
     position: relative;
 }
 #hero{
@@ -12,4 +13,24 @@ body{
     height: 80vh;
     width: 100%;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#hero button{
+    background-color: #327147;
+    padding: 70px;
+    font-size: 70px;
+    animation: grower 8s infinite  ;
+}
+@keyframes grower {
+    0% {
+        transform: scale(0.2);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100%{
+        transform: scale(0.2);
+    }
 }

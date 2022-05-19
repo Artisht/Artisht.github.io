@@ -77,7 +77,7 @@ function startblackjack() {
   currentPlayer = 0;
   createDeck();
   shuffle();
-  createPlayers(4);
+  createPlayers(2);
   createPlayersUI();
   dealHands();
   document.getElementById("player_" + currentPlayer).classList.add("active");
@@ -178,7 +178,8 @@ function stay() {
 function end() {
   var winner = -1;
   var score = 0;
-
+  var bet = 0;
+  
   for (var i = 0; i < players.length; i++) {
     if (players[i].Points > score && players[i].Points < 22) {
       winner = i;
@@ -190,12 +191,22 @@ function end() {
   document.getElementById("status").innerHTML =
     "Winner: " + players[winner].Name;
   document.getElementById("status").style.display = "inline-block";
+
+  if(players[winner].Name === "You"){
+    bet = parseInt(localStorage.getItem("bet"))
+    localStorage.setItem("bet", bet * 2)
+    document.querySelector("#bet #money").innerText = localStorage.getItem("bet") + "$"
+  } else{
+    bet = parseInt(localStorage.getItem("bet"))
+    localStorage.setItem("bet", bet/2)
+    document.querySelector("#bet #money").innerText = localStorage.getItem("bet") + "$"
+  }
 }
 
 function check() {
   if (players[currentPlayer].Points > 21) {
     document.getElementById("status").innerHTML =
-      "Player: " + players[currentPlayer].ID + " LOST";
+      "Player: " + players[currentPlayer].Name + " LOST";
     document.getElementById("status").style.display = "inline-block";
     end();
   }
@@ -219,3 +230,11 @@ window.addEventListener("load", function () {
   shuffle();
   createPlayers(1);
 });
+const input = document.querySelector("#bet input")
+input.onkeydown = (event) => {
+  if(event.key === "Enter"){
+    localStorage.setItem("bet", input.value)
+    input.style.display = "none"
+    document.querySelector("#bet #money").innerText = input.value + "$"
+  }
+} 
