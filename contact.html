@@ -10,7 +10,7 @@
     https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <title>Money Guzzler</title>
-    <link rel="stylesheet" href="CSS/main.css" />
+    <link rel="stylesheet" href="CSS/info.css" />
     <link rel="stylesheet" href="CSS/global.css" />
   </head>
   <body>
@@ -29,9 +29,28 @@
       </div>
       <i id="hamburger" class="fa fa-bars"></i>
     </header>
-    <div id="hero">
-      <a href="blackjack/blackjack.html"><button>Play now, Win NOW!</button></a>
-    </div>
+    <main>
+        <section id="location">
+            <div> <!-- map -->
+                <h1>Money Guzzler office.</h1>
+                <img class="map" src="pics/map.png" alt="Map of the area that our office is located">
+                <p>This is "the location" where we take care of minor issues of our customers. 
+                    Ofcourse no refunds. 
+                </p>
+            </div>
+        </section>
+        <section id="login"> <!-- Support -->
+            <div class="box">
+                <form method="post" name="Form" onsubmit="return validateForm()" action="">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name"><br><br>
+                    <label for="query">Query:</label>
+                    <input type="text" id="query" name="query"><br><br>
+                  </form>
+                <button  type="submit" onclick="validateForm()"><i>Send</i></button>
+            </div>
+        </section>
+    </main>
     <footer>
       <ul>
         <li><a href="userpolicy.html">Userpolicy</a></li>
@@ -40,6 +59,6 @@
       </ul>
       <p>THERE IS NO REFUNDS AND WE DO NOT TAKE ANY RESPONSEBILITY TO ANY MONEY LOST DURING GAMBLING</p>
     </footer>
-    <script src="Global.js" async defer></script>
-  </body>
+  <script src="Global.js" async defer></script>
+</body>
 </html>

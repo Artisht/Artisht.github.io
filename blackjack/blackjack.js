@@ -40,14 +40,13 @@ function createPlayersUI() {
     div_player.className = "player";
     div_hand.id = "hand_" + i;
 
-  
-    if(i === 0){
-      div_player.innerHTML = "You"
-      players[i].Name = "You"
-    } else if(i === players.length - 1){
-      div_player.innerHTML = "Dealer"
-      players[i].Name = "Dealer"
-    } else{
+    if (i === 0) {
+      div_player.innerHTML = "You";
+      players[i].Name = "You";
+    } else if (i === players.length - 1) {
+      div_player.innerHTML = "Dealer";
+      players[i].Name = "Dealer";
+    } else {
       div_player.innerHTML = "Player " + players[i].ID;
     }
     div_player.appendChild(div_playerid);
@@ -100,10 +99,10 @@ function dealHands() {
 
 function renderCard(card, player) {
   var hand = document.getElementById("hand_" + player);
-  hand.appendChild(getCardUI(card));
+  hand.appendChild(getCardUI(card, player));
 }
 
-function getCardUI(card) {
+function getCardUI(card, player) {
   var el = document.createElement("div");
   var icon = "";
   var color = "";
@@ -118,8 +117,15 @@ function getCardUI(card) {
   } else {
     icon = "&clubs;";
   }
-
-  el.className = `card${color}`;
+  if (players[player].Name === "Dealer"){
+    el.className = `card${color}`
+    if (players[player].Hand.length < 2){
+      el.id = "hidden"
+    }
+  }
+  else{
+    el.className = `card${color}`;
+  }
   el.innerHTML = card.Value + "<br/>" + icon;
   return el;
 }
@@ -165,10 +171,14 @@ function stay() {
     currentPlayer += 1;
     document.getElementById("player_" + currentPlayer).classList.add("active");
   }
-  if (players[currentPlayer].Name === "Dealer" ) {
+  if (players[currentPlayer].Name === "Dealer") {
     while (players[currentPlayer].Points < 17) {
       hitMe();
     }
+    e = document.getElementById("hidden");
+    e.id = " "
+    f = document.getElementById("points_1")
+    f.style.display = "block"
     end();
   } else {
     bot();
@@ -179,7 +189,7 @@ function end() {
   var winner = -1;
   var score = 0;
   var bet = 0;
-  
+
   for (var i = 0; i < players.length; i++) {
     if (players[i].Points > score && players[i].Points < 22) {
       winner = i;
@@ -192,22 +202,29 @@ function end() {
     "Winner: " + players[winner].Name;
   document.getElementById("status").style.display = "inline-block";
 
-  if(players[winner].Name === "You"){
-    bet = parseInt(localStorage.getItem("bet"))
-    localStorage.setItem("bet", bet * 2)
-    document.querySelector("#bet #money").innerText = localStorage.getItem("bet") + "$"
-  } else{
-    bet = parseInt(localStorage.getItem("bet"))
-    localStorage.setItem("bet", bet/2)
-    document.querySelector("#bet #money").innerText = localStorage.getItem("bet") + "$"
+  if (players[winner].Name === "You") {
+    bet = parseInt(localStorage.getItem("bet"));
+    localStorage.setItem("bet", bet * 2);
+    document.querySelector("#bet #money").innerText =
+      localStorage.getItem("bet") + "$";
+  } else {
+    bet = parseInt(localStorage.getItem("bet"));
+    localStorage.setItem("bet", bet / 2);
+    document.querySelector("#bet #money").innerText =
+      localStorage.getItem("bet") + "$";
   }
 }
 
 function check() {
   if (players[currentPlayer].Points > 21) {
     document.getElementById("status").innerHTML =
-      "Player: " + players[currentPlayer].Name + " LOST";
+      players[currentPlayer].Name + " LOST";
     document.getElementById("status").style.display = "inline-block";
+
+    bet = parseInt(localStorage.getItem("bet"));
+    localStorage.setItem("bet", bet / 2);
+    document.querySelector("#bet #money").innerText =
+      localStorage.getItem("bet") + "$";
     end();
   }
 }
@@ -222,7 +239,7 @@ function bot() {
   }
   if (players[currentPlayer].Points >= 17) {
     stay();
-  } 
+  }
 }
 
 window.addEventListener("load", function () {
@@ -230,11 +247,11 @@ window.addEventListener("load", function () {
   shuffle();
   createPlayers(1);
 });
-const input = document.querySelector("#bet input")
+const input = document.querySelector("#bet input");
 input.onkeydown = (event) => {
-  if(event.key === "Enter"){
-    localStorage.setItem("bet", input.value)
-    input.style.display = "none"
-    document.querySelector("#bet #money").innerText = input.value + "$"
+  if (event.key === "Enter") {
+    localStorage.setItem("bet", input.value);
+    input.style.display = "none";
+    document.querySelector("#bet #money").innerText = input.value + "$";
   }
-} 
+};

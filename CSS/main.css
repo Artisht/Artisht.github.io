@@ -6,10 +6,9 @@
 }
 body{
     overflow-x: hidden;
-    position: relative;
 }
 #hero{
-    background-image: url(pics/Casino-2.jpg);   
+    background-image: url(../pics/Casino-2.jpg);   
     height: 80vh;
     width: 100%;
     background-size: cover;
